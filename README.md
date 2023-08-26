@@ -25,8 +25,9 @@ This app was built using flutter with Supabase
 #hotels details 
 <img width="192" alt="hotelsdetailes" src="https://github.com/reef-mohammad/hotel/assets/74217487/11d51c8e-e86a-405d-8f6c-e0f9e699d2f6">
 # when the user wants to make a reservation
-<img width="200" alt="bookroom" src![Uploading insertdetailes.png…]()
-="https://github.com/reef-mohammad/hotel/assets/74217487/e1b2d7c6-903b-42b1-b391-15cd40214fdb">
+
+<img width="200" alt="bookroom" src="https://github.com/reef-mohammad/hotel/assets/74217487/70acaa52-c5f6-4e1c-8495-02bc966c9dd2">
+
 
 <img width="209" alt="insertdetailes" src="https://github.com/reef-mohammad/hotel/assets/74217487/df45d56e-dd07-4a78-ae0a-a4d6d983acb2">
 
