@@ -5,22 +5,25 @@ import 'package:hotel_database/constant/colors.dart';
 import 'package:hotel_database/constant/extensions.dart';
 import 'package:hotel_database/constant/spaces.dart';
 import 'package:hotel_database/models/hotel_room_model.dart';
+import 'package:hotel_database/models/reservations_model.dart';
 import 'package:hotel_database/screens/detailes.dart';
 
-class HotelCard extends StatelessWidget {
-  const HotelCard({
+class OrderCard extends StatelessWidget {
+  const OrderCard({
     super.key,
-    required this.hotel,
+    required this.reservation,
+    this.hotel,
   });
 
-  final Hotel hotel;
+  final Reservations reservation;
+  final Hotel? hotel;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         DetailesScreen(
-          hotel: hotel,
+          hotel: hotel!,
         ).push(context);
       },
       child: Material(
@@ -38,8 +41,13 @@ class HotelCard extends StatelessWidget {
             ),
             child: Column(
               children: [
+                Text(
+                  "${reservation.total_price} /night ",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16, color: grey),
+                ),
                 CachedNetworkImage(
-                  imageUrl: hotel.image ??
+                  imageUrl: hotel!.image ??
                       'https://demofree.sirv.com/nope-not-here.jpg',
                   errorWidget: (context, url, s) {
                     return Container(color: white);
@@ -50,7 +58,7 @@ class HotelCard extends StatelessWidget {
                 ),
                 Space.spaceH8,
                 Text(
-                  hotel.hotelName ?? 'No name',
+                  hotel!.hotelName ?? 'No name',
                   style: const TextStyle(
                       fontWeight: FontWeight.normal,
                       fontSize: 20,
@@ -59,60 +67,28 @@ class HotelCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                      child: Text(
-                        hotel.city ?? 'No City',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 14,
-                            color: grey),
-                        softWrap: false,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Flexible(
-                      child: Text(
-                        hotel.location ?? 'No loc',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 14,
-                            color: grey),
-                        softWrap: false,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
+                Flexible(
+                  child: Text(
+                    hotel!.city ?? 'No City',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                        color: grey),
+                    softWrap: false,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Space.spaceH32,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${hotel.price} /night ",
+                      "${hotel!.price} /night ",
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                           color: grey),
-                    ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                          size: 16,
-                        ),
-                        Text(
-                          "${hotel.rate} ",
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: Colors.green),
-                        ),
-                      ],
                     ),
                   ],
                 ),

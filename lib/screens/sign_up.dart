@@ -1,19 +1,16 @@
-import 'dart:developer';
-
-
 import 'package:flutter/material.dart';
+import 'package:hotel_database/constant/colors.dart';
 import 'package:hotel_database/constant/extensions.dart';
-import 'package:hotel_database/constant/spaces.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class Signup extends StatefulWidget {
+  Signup({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignupState extends State<Signup> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -26,49 +23,181 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final supabase = Supabase.instance.client;
-    log('Token: ${supabase.auth.currentSession?.accessToken}');
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextField(
+      appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          title: Text(
+            "Create Account",
+          ),
+          titleTextStyle: TextStyle(
+              color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            color: Colors.black,
+            onPressed: () => {Navigator.pop(context)},
+          )),
+      body: const MyStatefulWidget(),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final supabase = Supabase.instance.client;
+
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: ListView(
+        children: <Widget>[
+          Container(
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.all(5),
+              child: const Text(
+                'Username',
+                style: TextStyle(fontSize: 13.5),
+              )),
+          Container(
+            padding: const EdgeInsets.all(10),
+            child: TextField(
               controller: emailController,
               decoration: const InputDecoration(
-                  labelText: 'Email', border: OutlineInputBorder()),
+                prefixIcon: Icon(Icons.person),
+                border: OutlineInputBorder(),
+                labelText: 'Username',
+              ),
             ),
-            Space.spaceH8,
-            TextField(
+          ),
+          Container(
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.all(5),
+              child: const Text(
+                'First Name',
+                style: TextStyle(fontSize: 13.5),
+              )),
+          Container(
+            padding: const EdgeInsets.all(10),
+            child: TextField(
+              controller: emailController,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.person),
+                border: OutlineInputBorder(),
+                labelText: 'First Name',
+              ),
+            ),
+          ),
+          Container(
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.all(5),
+              child: const Text(
+                'Last Name',
+                style: TextStyle(fontSize: 13.5),
+              )),
+          Container(
+            padding: const EdgeInsets.all(10),
+            child: TextField(
+              controller: emailController,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.person),
+                border: OutlineInputBorder(),
+                labelText: 'Last Name',
+              ),
+            ),
+          ),
+          Container(
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.all(5),
+              child: const Text(
+                'Email Address',
+                style: TextStyle(fontSize: 13.5),
+              )),
+          Container(
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: TextField(
+              obscureText: true,
               controller: passwordController,
               decoration: const InputDecoration(
-                  labelText: 'Password', border: OutlineInputBorder()),
+                prefixIcon: Icon(Icons.email),
+                border: OutlineInputBorder(),
+                labelText: 'Enter Email Address',
+              ),
+            ),
+          ),
+          Container(
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.all(5),
+              child: const Text(
+                'Password',
+                style: TextStyle(fontSize: 13.5),
+              )),
+          Container(
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: TextField(
               obscureText: true,
+              controller: passwordController,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.password_rounded),
+                border: OutlineInputBorder(),
+                labelText: 'Enter Password',
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                if ((emailController.text.isNotEmpty &&
-                        emailController.text.isValidEmail) &&
-                    passwordController.text.isNotEmpty) {
-                  // Signing up ...
-                  await supabase.auth.signUp(
-                    email: emailController.text,
-                    password: passwordController.text,
-                  );
+          ),
+          Padding(
+            padding: const EdgeInsets.all(37.0),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    if ((emailController.text.isNotEmpty &&
+                            emailController.text.isValidEmail) &&
+                        passwordController.text.isNotEmpty) {
+                      // Signing up ...
+                      await supabase.auth.signUp(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
 
-                  // Pop after signing up
-                  if (context.mounted) {
-                    context.pop;
-                  }
-                }
-              },
-              child: const Text('Sign Up'),
+                      // Pop after signing up
+                      if (context.mounted) {
+                        context.pop;
+                      }
+                    }
+                  },
+                  child: Text("Continue"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: lightColor,
+                    fixedSize: Size(300, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                  width: 2,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                  child: Text(
+                    "by continuing ,you agree to the terms of the services & privacy policy",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

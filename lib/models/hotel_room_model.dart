@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class Hotel {
   String? hotelId;
   String? hotelName;
@@ -5,9 +7,10 @@ class Hotel {
   String? city;
   String? location;
   String? description;
-  String? price;
-  String? rate;
-  String? facilites;
+  int? price;
+  dynamic rate;
+  List<Facility>? facilites;
+
   String? reviews;
 
   Hotel(
@@ -31,6 +34,10 @@ class Hotel {
     description = json['description'];
     price = json['price'];
     rate = json['rate'];
+    facilites = (json['facilities']?['facilities'] as List?)
+        ?.map((e) => Facility.fromJson(e))
+        .toList();
+
     facilites = json['facilites'];
     reviews = json['reviews'];
   }
@@ -45,8 +52,21 @@ class Hotel {
     data['description'] = this.description;
     data['price'] = this.price;
     data['rate'] = this.rate;
+    
     data['facilites'] = this.facilites;
     data['reviews'] = this.reviews;
     return data;
+  }
+}
+class Facility {
+  final String facility;
+
+  Facility({ required this.facility});
+
+  factory Facility.fromJson(Map<String, dynamic> json) {
+    return Facility(
+      
+      facility: json['facility'],
+    );
   }
 }

@@ -1,11 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_database/components/color.dart';
-import 'package:hotel_database/screens/home_page.dart';
+import 'package:hotel_database/constant/colors.dart';
+import 'package:hotel_database/screens/home_screen.dart';
 import 'package:hotel_database/screens/notification_page.dart';
 import 'package:hotel_database/screens/orderes_page.dart';
 import 'package:hotel_database/screens/profile_page.dart';
-
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -16,8 +15,10 @@ class BottomNavBar extends StatefulWidget {
 
 class BottomNavBarState extends State<BottomNavBar> {
   final List<dynamic> _page = [
-    const Home(),
-   
+    HomeScreen(),
+    oreder(),
+    Notifications(),
+    Profile(),
   ];
   int _activePage = 0;
 
@@ -29,16 +30,29 @@ class BottomNavBarState extends State<BottomNavBar> {
           index: _activePage,
           height: 60.0,
           items: const <Widget>[
-            Icon(Icons.home, size: 30 , semanticLabel: "Home",),
             Icon(
-              Icons.receipt,semanticLabel: "Orders",
+              Icons.home,
+              size: 30,
+              semanticLabel: "Home",
+            ),
+            Icon(
+              Icons.receipt,
+              semanticLabel: "Orders",
               size: 30,
             ),
-            Icon(Icons.notifications, size: 30,semanticLabel: "Notifications",),
-            Icon(Icons.perm_identity, size: 30,semanticLabel: "Profile",),
+            Icon(
+              Icons.notifications,
+              size: 30,
+              semanticLabel: "Notifications",
+            ),
+            Icon(
+              Icons.perm_identity,
+              size: 30,
+              semanticLabel: "Profile",
+            ),
           ],
-          color:gery,
-          backgroundColor:white,
+          color: background,
+          backgroundColor: white,
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 600),
           onTap: (index) {
@@ -62,7 +76,7 @@ class HomeRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Home();
+    return HomeScreen();
   }
 }
 
@@ -71,7 +85,7 @@ class OrdersRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Orders();
+    return oreder();
   }
 }
 

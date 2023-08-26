@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hotel_database/components/curve_navigation.dart';
 import 'package:hotel_database/screens/first_page.dart';
-import 'package:hotel_database/screens/home_page.dart';
+import 'package:hotel_database/screens/home_screen.dart';
 import 'package:hotel_database/services/supabase_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -39,7 +40,7 @@ class _AppState extends State<App> {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: canGoHome ? const HomeScreen() : AuthScreen(),
+          child: canGoHome ? BottomNavBar() : WelcomePage(),
         ),
       ),
     );
