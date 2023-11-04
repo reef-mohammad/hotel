@@ -13,7 +13,7 @@ This app was built using flutter with Supabase
 # Welcome Page
 <img width="192" alt="welcome" src="https://github.com/reef-mohammad/hotel/assets/74217487/d810cd8a-a2f6-4a95-b3c8-e41fb480b2ba">
 
-  # Login  The user can log in with google and get a link (OTP)
+  # Login  The user can log in with google and get the magic link 
 <img width="208" alt="login" src="https://github.com/reef-mohammad/hotel/assets/74217487/e9caa850-3ebb-45e6-aec9-b800b408a83f">
 
 <img width="208" alt="otp" src="https://github.com/reef-mohammad/hotel/assets/74217487/e82b6c7a-3c78-4e18-8395-f45420f42c6c">
